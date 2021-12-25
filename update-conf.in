@@ -3,7 +3,7 @@
 PREFIX=
 VERSION=@VERSION@
 
-. $PREFIX/lib/libalpine.sh
+. $PREFIX/lib/libarionconf.sh
 
 # set up temp dir
 init_tmpdir TMPD

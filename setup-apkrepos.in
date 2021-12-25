@@ -4,7 +4,7 @@ PROGRAM=setup-apkrepos
 PREFIX=
 MIRRORS_URL=https://mirrors.alpinelinux.org/mirrors.txt
 
-. $PREFIX/lib/libalpine.sh
+. $PREFIX/lib/libarionconf.sh
 
 if [ "$ROOT" != "/" ]; then
 	apk_root_opt="--root $ROOT"
@@ -95,8 +95,8 @@ add_from_list() {
 	add_mirror "$mirror"
 }
 
-get_alpine_release() {
-	local version=$(cat "${ROOT}"etc/alpine-release 2>/dev/null)
+get_arion_release() {
+	local version=$(cat "${ROOT}"etc/arion-release 2>/dev/null)
 	case "$version" in
 		*_git*|*_alpha*) release="edge";;
 		[0-9]*.[0-9]*.[0-9]*)
@@ -177,7 +177,7 @@ if [ -r "$APKREPOS_PATH" ]; then
 	APKREPOS=$(cat "$APKREPOS_PATH")
 fi
 
-get_alpine_release
+get_arion_release
 changed=false
 
 if [ $# -gt 0 ]; then

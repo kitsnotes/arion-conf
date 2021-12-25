@@ -5,7 +5,7 @@ PREFIX=
 
 PKGS=
 
-for i in ./libalpine.sh $PREFIX/lib/libalpine.sh; do
+for i in ./libarionconf.sh $PREFIX/lib/libarionconf.sh; do
 	[ -e $i ] && . $i && break
 done
 

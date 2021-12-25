@@ -1,10 +1,10 @@
 #!/bin/sh
 
-PROGRAM=setup-alpine
+PROGRAM=setup-arion
 VERSION=@VERSION@
 
 PREFIX=
-. $PREFIX/lib/libalpine.sh
+. $PREFIX/lib/libarionconf.sh
 
 is_qemu() {
 	grep -q "QEMU" /proc/cpuinfo \
@@ -13,12 +13,12 @@ is_qemu() {
 
 usage() {
 	cat <<-__EOF__
-		usage: setup-alpine [-ahq] [-c FILE | -f FILE]
+		usage: setup-arion [-ahq] [-c FILE | -f FILE]
 
-		Setup Alpine Linux
+		Setup Arion
 
 		options:
-		 -a  Create Alpine Linux overlay file
+		 -a  Create Arion overlay file
 		 -c  Create answer file (do not install anything)
 		 -e  Empty root password
 		 -f  Answer file to use installation
@@ -35,7 +35,7 @@ while getopts "aef:c:hq" opt ; do
 		c) CREATEANSWERFILE="$OPTARG";;
 		e) empty_root_password=1;;
 		h) usage;;
-		q) empty_root_password=1; quick=1; APKREPOSOPTS="-1"; HOSTNAMEOPTS="alpine";;
+		q) empty_root_password=1; quick=1; APKREPOSOPTS="-1"; HOSTNAMEOPTS="arion";;
 		*) usage;;
 	esac
 done
@@ -68,14 +68,14 @@ fi
 if [ -n "$CREATEANSWERFILE" ]; then
 	touch "$CREATEANSWERFILE" || echo "Cannot touch file $CREATEANSWERFILE"
 	cat > "$CREATEANSWERFILE" <<-__EOF__
-		# Example answer file for setup-alpine script
+		# Example answer file for setup-arion script
 		# If you don't want to use a certain option, then comment it out
 
 		# Use US layout with US variant
 		KEYMAPOPTS="us us"
 
-		# Set hostname to alpine-test
-		HOSTNAMEOPTS="-n alpine-test"
+		# Set hostname to arion-test
+		HOSTNAMEOPTS="-n arion-test"
 
 		# Contents of /etc/network/interfaces
 		INTERFACESOPTS="auto lo
@@ -83,7 +83,7 @@ if [ -n "$CREATEANSWERFILE" ]; then
 
 		auto eth0
 		iface eth0 inet dhcp
-		    hostname alpine-test
+		    hostname arion-test
 		"
 
 		# Search domain of example.com, Google public nameserver
@@ -117,7 +117,7 @@ if [ -n "$CREATEANSWERFILE" ]; then
 fi
 
 if [ "$ARCHIVE" ] ; then
-	echo "Creating an Alpine overlay"
+	echo "Creating an Arion overlay"
 	init_tmpdir ROOT
 else
 	PKGADD="apk add"
@@ -210,7 +210,7 @@ fi
 DEFAULT_DISK=none \
 	$PREFIX/sbin/setup-disk -q ${DISKOPTS} || exit
 
-diskmode=$(cat /tmp/alpine-install-diskmode.out 2>/dev/null)
+diskmode=$(cat /tmp/arion-install-diskmode.out 2>/dev/null)
 
 # setup lbu and apk cache unless installed sys on disk
 if [ "$diskmode" != "sys" ]; then

@@ -9,7 +9,7 @@
 # Copyright (c) 2014-2021 Kaarle Ritvanen
 
 PREFIX=
-. $PREFIX/lib/libalpine.sh
+. $PREFIX/lib/libarionconf.sh
 
 SCRIPT=update-kernel
 VIRTUAL=.tmp-$SCRIPT
@@ -263,7 +263,7 @@ else
 	fi
 	PACKAGES="$PACKAGES linux-$FLAVOR linux-firmware"
 fi
-_apk add --no-scripts alpine-base $PACKAGES
+_apk add --no-scripts arion-base $PACKAGES
 
 if [ -n "$APK_PUBKEY" ]; then
 	mkdir -p "$ROOT"/etc/apk/keys

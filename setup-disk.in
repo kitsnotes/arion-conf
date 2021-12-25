@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PREFIX=
-. "$PREFIX/lib/libalpine.sh"
+. "$PREFIX/lib/libarionconf.sh"
 . "$PREFIX/lib/dasd-functions.sh"
 
 MBR=${MBR:-"/usr/share/syslinux/mbr.bin"}
@@ -318,9 +318,9 @@ setup_grub() {
 		# currently disabling nvram so grub doesnt call efibootmgr
 		# installing to alpine directory so other distros dont overwrite it
 		grub-install --target=$target --efi-directory="$efi_directory" \
-			--bootloader-id=alpine --boot-directory="$mnt"/boot --no-nvram
+			--bootloader-id=arion --boot-directory="$mnt"/boot --no-nvram
 		# fallback mode will use boot/boot${fw arch}.efi
-		install -D "$efi_directory"/EFI/alpine/grub$fwa.efi \
+		install -D "$efi_directory"/EFI/arion/grub$fwa.efi \
 			"$efi_directory"/EFI/boot/boot$fwa.efi
 	# install GRUB for ppc64le
 	elif [ "$ARCH" = "ppc64le" ]; then
@@ -381,7 +381,7 @@ setup_uboot() {
 
 	mkdir -p "$mnt"/boot/extlinux
 	cat > "$mnt/boot/extlinux/extlinux.conf" <<- EOF
-	menu title Alpine Linux
+	menu title Arion System
 	timeout 50
 	default $KERNEL_FLAVOR
 
@@ -640,7 +640,7 @@ install_mounted_root() {
 	local pkgs=$(grep -h -v -w sfdisk "$mnt"/etc/apk/world \
 		"$mnt"/var/lib/apk/world 2>/dev/null)
 
-	pkgs="$pkgs acct linux-$KERNEL_FLAVOR alpine-base $(select_bootloader_pkg)"
+	pkgs="$pkgs acct linux-$KERNEL_FLAVOR arion-base $(select_bootloader_pkg)"
 	if [ "$(rc --sys)" = "XEN0" ]; then
 		pkgs="$pkgs xen-hypervisor"
 	fi
@@ -1355,7 +1355,7 @@ usage() {
 		usage: setup-disk [-hLqrve] [-k kernelflavor] [-m MODE] [-o apkovl] [-s SWAPSIZE]
 		                  [MOUNTPOINT | DISKDEV...]
 
-		Install alpine on harddisk.
+		Install Arion on harddisk.
 
 		If MOUNTPOINT is specified, then do a traditional disk install with MOUNTPOINT
 		as root.
@@ -1573,5 +1573,5 @@ none) exit 0;;
 esac
 
 RC=$?
-echo "$DISK_MODE" > /tmp/alpine-install-diskmode.out
+echo "$DISK_MODE" > /tmp/arion-install-diskmode.out
 exit $RC

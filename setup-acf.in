@@ -4,7 +4,7 @@ PROGRAM=setup-acf
 VERSION=@VERSION@
 
 PREFIX=
-. $PREFIX/lib/libalpine.sh
+. $PREFIX/lib/libarionconf.sh
 
 usage() {
 	echo "$PROGRAM [-ahn] [-e email] [-l address] [PACKAGE...]"

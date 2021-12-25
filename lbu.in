@@ -7,13 +7,13 @@
 VERSION=@VERSION@
 sysconfdir=@sysconfdir@
 
-if [ ! -f ${libalpine:="./libalpine.sh"} ]; then
-	libalpine=/usr/share/lbu/libalpine.sh
-	if [ ! -f "$libalpine" ]; then
-		libalpine=/lib/libalpine.sh
+if [ ! -f ${libarionconf:="./libarionconf.sh"} ]; then
+	libarionconf=/usr/share/lbu/libarionconf.sh
+	if [ ! -f "$libarionconf" ]; then
+		libarionconf=/lib/libarionconf.sh
 	fi
 fi
-. $libalpine || exit 1
+. $libarionconf || exit 1
 
 EXCLUDE_LIST="$sysconfdir"/exclude
 INCLUDE_LIST="$sysconfdir"/include

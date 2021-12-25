@@ -3,7 +3,7 @@
 PROGRAM=setup-hostname
 PREFIX=
 
-. $PREFIX/lib/libalpine.sh
+. $PREFIX/lib/libarionconf.sh
 
 usage() {
 	cat <<-__EOF__

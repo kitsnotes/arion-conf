@@ -2,7 +2,7 @@
 
 prog=${0##*/}
 version=@VERSION@
-files_to_move="boot efi apks syslinux.cfg .alpine-release"
+files_to_move="boot efi apks syslinux.cfg .arion-release"
 read_only_mounts=
 umounts=
 uninstalls=
@@ -173,9 +173,9 @@ check_syslinux() {
 version_check() {
 	local new_dir="$1" old_dir="$2"
 	# check if its same version
-	local to_version=$(cat "$new_dir"/.alpine-release)
-	if [ -n "$upgrade" ] && [ -e "$old_dir"/.alpine-release ]; then
-		local from_version=$(cat "$old_dir"/.alpine-release)
+	local to_version=$(cat "$new_dir"/.arion-release)
+	if [ -n "$upgrade" ] && [ -e "$old_dir"/.arion-release ]; then
+		local from_version=$(cat "$old_dir"/.arion-release)
 		if [ -z "$force" ] && [ -n "$to_version" ] && [ "$from_version" = "$to_version" ]; then
 			die "Source and target seems to have same version ($from_version). Aborting."
 		fi
@@ -200,7 +200,7 @@ usage() {
 		 -f  Force overwrite existing files. Will overwrite syslinux.cfg if upgrade.
 		 -h  Show this help.
 		 -k  fix kernel and initrd name in syslinux.cfg if needed.
-		 -U  Replace current alpine_dev in syslinux.cfg with UUID if UUID found.
+		 -U  Replace current arion_dev in syslinux.cfg with UUID if UUID found.
 		 -u  Upgrade mode. Keep existing syslinux.cfg and don't run syslinux.
 		 -s  Force run syslinux, even if upgrade mode.
 		 -v  Verbose mode. Display whats going on.
@@ -217,7 +217,7 @@ while getopts "c:fhkUusv" opt; do
 	f) force=1; fix_syslinux_cfg=1;;
 	h) usage;;
 	k) fix_syslinux_cfg=1;;
-	U) replace_alpine_dev=1;;
+	U) replace_arion_dev=1;;
 	u) upgrade=1;;
 	s) syslinux=1;;
 	v) verbose=1;;
@@ -288,7 +288,7 @@ rm -rf "$destdir"/.new "$destdir"/.old
 mkdir -p "$destdir"/.new || die "Failed to create $destdir/.new"
 
 # copy data from source to .new
-if [ -f "$src"/.alpine-release ]; then
+if [ -f "$src"/.arion-release ]; then
 	srcdir="$(echo $src | sed -r 's,/$,,')"
 	version_check "$srcdir" "$destdir"
 	for i in $files_to_move; do
@@ -355,8 +355,8 @@ for i in $files_to_move; do
 	fi
 done
 
-if [ -n "$replace_alpine_dev" -o -z "$upgrade" ] && [ -n "$UUID" ]; then
-	sed -E -i -e "s/alpine_dev=[^ \t:]+/alpine_dev=UUID=$UUID/" \
+if [ -n "$replace_arion_dev" -o -z "$upgrade" ] && [ -n "$UUID" ]; then
+	sed -E -i -e "s/arion_dev=[^ \t:]+/arion_dev=UUID=$UUID/" \
 		"$destdir"/$syslinux_cfg
 fi
 

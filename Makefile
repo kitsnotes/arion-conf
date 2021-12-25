@@ -1,14 +1,14 @@
-VERSION		:= 3.13.0
+VERSION		:= 1.0.0
 
 sysconfdir	?= /etc/lbu
 
 PREFIX		?=
 
-LIB_FILES	:= libalpine.sh dasd-functions.sh
+LIB_FILES	:= libarionconf.sh dasd-functions.sh
 SBIN_FILES	:= copy-modloop\
 		lbu\
 		setup-acf\
-		setup-alpine\
+		setup-arion\
 		setup-apkcache\
 		setup-apkrepos\
 		setup-bootable\
@@ -43,8 +43,8 @@ FULL_VERSION	:= $(VERSION)
 endif
 
 
-DESC="Alpine configuration scripts"
-WWW="http://git.alpinelinux.org/cgit/alpine-conf/"
+DESC="Arion configuration scripts"
+WWW="http://github.com/kitsnotes/arion-conf/"
 
 
 SED		:= sed
