@@ -2,7 +2,7 @@
 
 PROGRAM=setup-apkrepos
 PREFIX=
-MIRRORS_URL=https://mirrors.alpinelinux.org/mirrors.txt
+MIRRORS_URL=https://arionos.org/arion-mirrors.txt
 
 . $PREFIX/lib/libarionconf.sh
 

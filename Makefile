@@ -17,7 +17,6 @@ SBIN_FILES	:= copy-modloop\
 		setup-interfaces\
 		setup-keymap\
 		setup-lbu\
-		setup-mta\
 		setup-ntp\
 		setup-proxy\
 		setup-sshd\
