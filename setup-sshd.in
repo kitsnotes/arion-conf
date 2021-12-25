@@ -37,9 +37,6 @@ if [ "$sshdchoice" = "none" ]; then
 fi
 
 pkgs="$sshdchoice"
-if [ "$sshdchoice" = "openssh" ] && apk info --quiet --installed acf-core; then
-	pkgs="$pkgs acf-openssh"
-fi
 
 apk add --quiet $pkgs
 

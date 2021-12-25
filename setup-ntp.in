@@ -39,9 +39,6 @@ busybox)
 	svc=ntpd
 	;;
 chrony)
-	if apk info --installed --quiet acf-core; then
-		pkgs="$pkgs acf-chrony"
-	fi
 	svc=chronyd
 	;;
 openntpd)
