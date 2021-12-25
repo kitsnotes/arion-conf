@@ -7,7 +7,6 @@ PREFIX		?=
 LIB_FILES	:= libarionconf.sh dasd-functions.sh
 SBIN_FILES	:= copy-modloop\
 		lbu\
-		setup-acf\
 		setup-arion\
 		setup-apkcache\
 		setup-apkrepos\
@@ -23,7 +22,6 @@ SBIN_FILES	:= copy-modloop\
 		setup-proxy\
 		setup-sshd\
 		setup-timezone\
-		setup-xen-dom0\
 		update-conf\
 		update-kernel
 
