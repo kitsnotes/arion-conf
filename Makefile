@@ -24,7 +24,6 @@ SBIN_FILES	:= copy-modloop\
 		setup-sshd\
 		setup-timezone\
 		setup-xen-dom0\
-		setup-xorg-base\
 		update-conf\
 		update-kernel
 

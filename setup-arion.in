@@ -42,11 +42,6 @@ done
 shift $(expr $OPTIND - 1)
 
 rc_sys=$(openrc --sys)
-# mount xenfs so we can detect xen dom0
-if [ "$rc_sys" = "XENU" ] && ! grep -q '^xenfs' /proc/mounts; then
-	modprobe xenfs
-	mount -t xenfs xenfs /proc/xen
-fi
 
 case "$USEANSWERFILE" in
 	http*://*|ftp://*)
@@ -198,10 +193,6 @@ if [ "$quick" = 1 ]; then
 fi
 
 $PREFIX/sbin/setup-sshd ${SSHDOPTS}
-
-if is_xen_dom0; then
-	setup-xen-dom0
-fi
 
 if [ "$rc_sys" = "LXC" ]; then
 	exit 0
